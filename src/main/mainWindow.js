@@ -5,8 +5,11 @@ const winHandler = new BrowserWinHandler({
   height: 600,
   width: 450,
   resizable: false,
+  autoHideMenuBar: true,
   icon: path.join(__dirname, 'src/renderer/assets/sunrin.png')
 })
+
+winHandler.autoHideMenuBar = true
 
 winHandler.onCreated(_browserWindow => {
   winHandler.loadPage('/')

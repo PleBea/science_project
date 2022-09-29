@@ -2,7 +2,7 @@ const ICONS_DIR = 'src/renderer/assets/'
 
 const windowsOS = {
   win: {
-    icon: ICONS_DIR + 'sunrin.png',
+    icon: ICONS_DIR + 'sunrin_256.png',
     publisherName: 'michal',
     target: 'nsis'
   },
@@ -11,38 +11,8 @@ const windowsOS = {
     differentialPackage: true
   }
 }
-
-const linuxOS = {
-  linux: {
-    icon: ICONS_DIR,
-    target: 'deb'
-  }
-}
-
-const macOS = {
-  mac: {
-    target: 'dmg',
-    icon: ICONS_DIR + 'con.icns'
-  },
-  dmg: {
-    contents: [
-      {
-        x: 410,
-        y: 150,
-        type: 'link',
-        path: '/Applications'
-      },
-      {
-        x: 130,
-        y: 150,
-        type: 'file'
-      }
-    ]
-  }
-}
-
 module.exports = {
-  productName: 'science_project',
+  productName: 'transcription-translator',
   appId: 'com.science.dnaproject',
   artifactName: 'setup-${version}.${ext}',
   directories: {
@@ -66,7 +36,5 @@ module.exports = {
       to: ''
     }
   ],
-  ...windowsOS,
-  ...linuxOS,
-  ...macOS
+  ...windowsOS
 }

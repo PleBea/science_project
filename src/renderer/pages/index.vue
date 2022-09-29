@@ -5,7 +5,7 @@
         <div class="title">🔒 암호문</div>
         <button class="title_button" @click="translate">번역</button>
       </div>
-      <textarea v-model="secure" cols="30" rows="10" />
+      <textarea v-model="secure" class="title_textarea" cols="30" rows="10" />
     </div>
     <div class="trans">
       <div class="title">📃 전사문</div>
@@ -16,6 +16,10 @@
       <div class="title">📖 번역문</div>
       <br>
       <textarea v-model="result" readonly cols="30" rows="10" />
+    </div>
+
+    <div v-if="error" class="error">
+      <p>{{ errorMessage }}</p>
     </div>
 
     <div class="footer">
@@ -30,11 +34,6 @@ import Vue from 'vue'
 import * as Hangul from 'hangul-js'
 const word = require('~/assets/word.json')
 
-// A > U
-// C > G
-// G > C
-// T > A
-
 export default Vue.extend({
   name: 'IndexPage',
   data () {
@@ -43,20 +42,29 @@ export default Vue.extend({
       trans: '' as string,
       result: '' as string,
       tmpArr: [] as unknown as string,
+      error: false,
+      errorMessage: '' as string,
       validation (secure: string) {
         const korean = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
         const english = ['A', 'C', 'G', 'T']
 
         if (!secure) {
-          alert('입력해주세요.')
+          this.error = true
+          this.errorMessage = '암호문을 입력해주세요.'
           return false
         } else if (korean.test(secure)) {
-          alert('영어만 입력해주세요.')
+          this.error = true
+          this.errorMessage = '영어만 입력해주세요.'
+          return false
+        } else if (secure.length % 3 !== 0) {
+          this.error = true
+          this.errorMessage = '3의 배수로 입력해주세요.'
           return false
         } else {
           for (let i = 0; i < secure.length; i++) {
             if (!english.includes(secure[i])) {
-              alert('정확한 DNA 값을 입력해주세요.')
+              this.error = true
+              this.errorMessage = '정확한 DNA 값을 입력해주세요.'
               return false
             }
           }
@@ -88,8 +96,7 @@ export default Vue.extend({
         this.tmpArr = [] as unknown as string
         const tmpArr: string[] = this.trans.split(' ')
         tmpArr.forEach(element => {
-          if (!element) { return }
-          this.tmpArr += word[element]
+          if (element) { this.tmpArr += word[element] }
         })
         this.result = ''
         this.result = Hangul.assemble([...this.tmpArr])
