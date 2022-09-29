@@ -1,0 +1,113 @@
+.index {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+    padding: 20px 25px;
+}
+
+.title {
+    font-size: 28px;
+    display: inline-block;
+    position: relative;
+    font-weight: 700;
+
+    &::before {
+        content: '';
+        height: 18px;
+        background-color: #000;
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
+        right: 0%;
+        z-index: -15;
+        background-color: rgba(252, 197, 33, 0.5);
+    }
+
+    &_button {
+        position: relative;
+        &::after {
+            content: '소문자도 입력 가능합니다.';
+            font-weight: 300;
+            font-size: 12px;
+            position: absolute;
+            right: 110%;
+            bottom: 0px;
+            white-space: nowrap;
+            color: black;
+        }
+    }
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+
+    border: solid 3px rgb(252, 197, 33);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.secure {
+    &_wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+button {
+    width: 70px;
+    cursor: pointer;
+    font-weight: 700;
+    color: rgb(252, 197, 33);
+    font-size: 18px;
+    background-color: white;
+    border: solid 2px rgb(252, 197, 33);
+    border-radius: 8px;
+    transition: .3s;
+
+    &:hover {
+        background-color: rgb(252, 197, 33);
+        color: white;
+    }
+
+    &:active {
+        transform: scale(0.85);
+    }
+}   
+
+.footer {
+    position: absolute;
+    display: flex;
+    bottom: 25px;
+    right: 20px;
+    gap: 5px;
+
+    img {
+        width: 30px;
+    }
+    h1 {
+        font-size: 18px;
+        font-weight: 300;
+        align-items: center;
+        display: inline-block;
+    }
+}
+
+.trans {
+    textarea {
+        cursor: default;
+    }
+}
+
+.result {
+    textarea {
+        cursor: default;
+    }
+}
